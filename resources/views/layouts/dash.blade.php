@@ -39,7 +39,7 @@
                     </div>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="{{ route('home') }}">
                         <i class="material-icons">
                             home
                         </i>
@@ -47,7 +47,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#!">
+                    <a href="{{ route('clientes.index') }}">
                         <i class="material-icons">
                             people_alt
                         </i>
@@ -84,5 +84,9 @@
         $('#formLogout').submit();
     }
 </script>
+
+@include('partials.messages')
+
+@yield('scripts')
 </body>
 </html>

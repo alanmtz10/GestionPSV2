@@ -3,23 +3,81 @@
 @section('contenido')
     <div class="container">
         <div class="row">
+            <div class="col s12">
+                <h4 style="text-align: center">
+                    Hola {{ Auth::user()->name }},<br>
+                    @if($horaDia >= 5 && $horaDia < 12)
+                        <span>Buenos días</span>
+                    @elseif($horaDia >= 12 && $horaDia < 19)
+                        <span>Buenas tardes</span>
+                    @else
+                        <span>Buenas noches</span>
+                    @endif
+                </h4>
+            </div>
+        </div>
+        <div class="row">
             <div class="col s6">
-                {{--                <iframe--}}
-                {{--                    src="http://docs.google.com/gview?url=https://www.uma.es/ejemplo-grupo-de-investigacion/navegador_de_ficheros/repositorio-grupos-de-investigacion/descargar/documentaci%C3%B3n%20becas%20junta/documento%20de%20prueba.pdf&embedded=true"--}}
-                {{--                    style="width:100%; height: 60vh;" frameborder="0"></iframe>--}}
-
-                <div class="card-panel purple darken-4 waves-effect waves-light white-text" style="width: 100%">
-                    <div class="row">
-                        <div class="col s12">
-                            <img src="{{ asset('./img/svg/1.svg') }}" width="80%">
+                <a href="{{ route('pedidos.create') }}">
+                    <div class="card-panel purple lighten-3 waves-effect waves-light white-text"
+                         style="width: 100%; padding: 15px; border-radius: 15px;">
+                        <div class="row">
+                            <div class="col offset-s1 s10">
+                                <img src="{{ asset('./img/svg/6.svg') }}" width="100%">
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom: 0">
+                            <div class="col s12">
+                                <h6 style="text-align: center;">Registro de pedidos</h6>
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col s12">
-                            <h6 style="text-align: center;">Pedidos</h6>
+                </a>
+            </div>
+            <div class="col s6">
+                <a href="">
+                    <div class="card-panel pink darken-3 waves-effect waves-light white-text"
+                         style="width: 100%; padding: 15px; border-radius: 15px;">
+                        <div class="row">
+                            <div class="col offset-s1 s10">
+                                <img src="{{ asset('./img/svg/2.svg') }}" width="100%">
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom: 0">
+                            <div class="col s12">
+                                <h6 style="text-align: center;">Pagos pendientes</h6>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s6">
+                <h6>Mis catálogos</h6>
+            </div>
+            <div class="col s6">
+                <a href="{{ route('catalogo.create') }}" class="btn btn-small waves-effect waves-light">
+                    Agregar catalogo
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <ul class="collection">
+                    <li class="collection-item avatar">
+                        <i class="material-icons circle pink lighten-2">picture_as_pdf</i>
+                        <span class="title">Nombre catalogo</span>
+                        <p>
+                            Marca
+                        </p>
+                        <a href="#!" class="secondary-content" style="color: #A13A3D">
+                            <i class="material-icons">
+                                remove_red_eye
+                            </i>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
