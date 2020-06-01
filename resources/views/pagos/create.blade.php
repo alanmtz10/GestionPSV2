@@ -39,7 +39,7 @@
                         <div class="input-field col s12">
                             <i class="material-icons prefix">date_range</i>
                             <input type="text" class="datepicker" name="fecha_max">
-                            <label for="monto">Fecha de pago</label>
+                            <label for="fecha_max">Fecha de pago</label>
                         </div>
                     </div>
                     <div class="row">
