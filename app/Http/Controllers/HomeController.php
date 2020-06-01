@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Catalogo;
+use App\Notificacion;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,6 +27,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $nNotificaciones = Notificacion::where('user_id', '=', Auth::user()->id)->where('leida', '=', false)->count();
+
         $horaDia = Carbon::now()->hour;
         if (Auth::user()->tipo_usuario == 1) {
             $catalogos = Catalogo::where('vendedor_id', '=', Auth::user()->id)->get();
@@ -34,7 +37,7 @@ class HomeController extends Controller
             $catalogos = Auth::user()->vendedor->catalogos;
         }
 
-        return view('home', compact(['horaDia', 'catalogos']));
+        return view('home', compact(['horaDia', 'catalogos', 'nNotificaciones']));
 
 
     }

@@ -20,6 +20,32 @@
         .sidenav-overlay {
             display: none !important;
         }
+
+        .datepicker::placeholder {
+            color: dimgrey;
+        }
+
+        .new-notifications {
+            color: white !important;
+            animation-name: alert;
+            animation-duration: 1s;
+            animation-delay: 0s;
+            animation-direction: alternate;
+            animation-iteration-count: infinite;
+        }
+
+        .new-notifications .text {
+            color: white !important;
+        }
+
+        @keyframes alert {
+            0% {
+                background: #ad1457;
+            }
+            100% {
+                background: #ce93d8;
+            }
+        }
     </style>
 </head>
 <body>
@@ -56,6 +82,14 @@
                         </a>
                     </li>
                 @endif
+                <li class="{{ isset($nNotificaciones) && $nNotificaciones != 0 ? 'new-notifications' : '' }}">
+                    <a href="{{ route('notificaciones.index') }}" class="text">
+                        <i class="material-icons text">
+                            warning
+                        </i>
+                        Notificaciones
+                    </a>
+                </li>
                 <li class="divider"></li>
                 <li>
                     <a href="#" onclick="cerrarSesion()">
@@ -65,7 +99,6 @@
                     </a>
                     <form action="{{ route('logout') }}" method="POST" id="formLogout">
                         @csrf
-
                     </form>
                 </li>
             </ul>

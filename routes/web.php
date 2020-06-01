@@ -99,4 +99,25 @@ Route::middleware(['auth'])->group(function () {
         'as' => 'pago.store',
         'uses' => 'PagosController@store'
     ]);
+
+    Route::get('/pago/{id}/edit', [
+        'as' => 'pago.edit',
+        'uses' => 'PagosController@edit'
+    ]);
+
+    Route::put('/pago/{id}/edit', [
+        'as' => 'pago.update',
+        'uses' => 'PagosController@update'
+    ]);
+    /**
+     * Rutas notificaciones
+     */
+    Route::get('/notificaciones', [
+        'as' => 'notificaciones.index',
+        'uses' => 'NotificacionesController@index'
+    ]);
+    Route::get('/notificaciones/{id}', [
+        'as' => 'notificaciones.show',
+        'uses' => 'NotificacionesController@show'
+    ]);
 });

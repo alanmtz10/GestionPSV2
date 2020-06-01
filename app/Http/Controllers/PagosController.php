@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Notificacion;
 use App\Pago;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -58,6 +59,16 @@ class PagosController extends Controller
 
         $pago->save();
 
+        $notificacion = new Notificacion([
+            'desc' => 'Tienes nuevos pagos pendientes',
+            'user_id' => $pago->cliente_id,
+            'notificable_type' => Pago::class,
+            'notificable_id' => $pago->id,
+            'leida' => false
+        ]);
+
+        $notificacion->save();
+
         return back()->with([
             'message' => 'Se ha notificado a ' . $pago->cliente->name . ' que tiene un pago pendiente'
         ]);
@@ -82,7 +93,9 @@ class PagosController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pago = Pago::find($id);
+
+        return view('pagos.edit', compact('pago'));
     }
 
     /**
@@ -92,9 +105,37 @@ class PagosController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $r, $id)
     {
-        //
+        $pago = Pago::find($id);
+
+        if ($r->has('monto')) {
+            if ($r->monto <= $pago->monto) {
+                $pago->monto = $pago->monto - $r->monto;
+                if ($pago->monto == 0) {
+                    $pago->estado = 1;
+                }
+            }
+        }
+        if ($r->has('fecha_max')) {
+            $pago->prox_fecha = Carbon::createFromFormat('M d, Y', $r->fecha_max);
+        }
+
+        $pago->save();
+
+        $notificacion = new Notificacion([
+            'desc' => 'Se ha modificado la información de tu pago ' . $pago->desc,
+            'user_id' => $pago->cliente_id,
+            'notificable_type' => Pago::class,
+            'notificable_id' => $pago->id,
+            'leida' => false
+        ]);
+
+        $notificacion->save();
+
+        return back()->with([
+            'message' => 'Se actualizo la información del pago'
+        ]);
     }
 
     /**

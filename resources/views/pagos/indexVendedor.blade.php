@@ -38,14 +38,27 @@
         @else
             <div class="row">
                 <div class="col s12">
-                    <ul class="collection">
+                    <ul class="collection collapsible">
                         @foreach($pagos as $p)
                             <li class="collection-item avatar">
-                                <img src="{{ asset('img/avatar.png') }}" alt="" class="circle">
-                                <strong class="title">{{ $p->desc }}</strong>
-                                <p>{{ $p->monto }}</p>
-                                <p>{{ $p->cliente->name }}</p>
-                                <p>{{ $p->created_at->diffForHumans() }}</p>
+                                <div class="row" style="margin-bottom: 0">
+                                    <div class="col s10">
+                                        <img src="{{ asset('img/avatar.png') }}" alt="" class="circle">
+                                        <strong class="title">{{ $p->desc }}</strong><br>
+                                        <p>${{ $p->monto }}</p>
+                                        <p>{{ $p->cliente->name }}</p>
+                                        <p>{{ $p->created_at->diffForHumans() }}</p>
+                                    </div>
+                                    @if(Auth::user()->tipo_usuario == 1)
+                                        <div class="col s2">
+                                            <a href="{{ route('pago.edit',$p->id) }}" class="waves-effect waves-light">
+                                                <i class="material-icons">
+                                                    create
+                                                </i>
+                                            </a>
+                                        </div>
+                                    @endif
+                                </div>
                             </li>
                         @endforeach
                     </ul>
