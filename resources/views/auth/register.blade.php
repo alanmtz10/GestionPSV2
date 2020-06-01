@@ -1,10 +1,10 @@
 @extends('layouts.auth')
 
 @section('contenido')
-    <div class="container center-align valign-wrapper" style="height: 100vh">
+    <div class="container center-align valign-wrapper" style="height: 100vh;">
         <div class="row">
             <div class="col s12">
-                <div class="card-panel">
+                <div class="card-panel" style="background: #F29E1F9A">
                     <form action="{{ url('/reg') }}" method="POST">
                         @csrf
                         <div class="row">

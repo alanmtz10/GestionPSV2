@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Catalogo;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -25,6 +26,9 @@ class HomeController extends Controller
     public function index()
     {
         $horaDia = Carbon::now()->hour;
-        return view('home', compact('horaDia'));
+
+        $catalogos = Catalogo::all();
+
+        return view('home', compact(['horaDia', 'catalogos']));
     }
 }

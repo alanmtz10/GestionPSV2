@@ -21,6 +21,7 @@ class PedidosController extends Controller
             'marca' => $r->marca,
             'producto' => $r->producto,
             'cliente_id' => $r->cliente,
+            'status' => 0
         ]))->save();
 
         return back()->with([

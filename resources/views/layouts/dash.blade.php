@@ -67,7 +67,7 @@
                     </form>
                 </li>
             </ul>
-            <a href="#" class="right" style="margin-right: 10px">
+            <a href="{{ route('home') }}" class="right" style="margin-right: 10px">
                 <img src="{{ asset('img/avatar.png') }}" class="circle center-align" height="40px" width="40px">
             </a>
         </div>

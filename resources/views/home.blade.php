@@ -35,7 +35,7 @@
                 </a>
             </div>
             <div class="col s6">
-                <a href="">
+                <a href="{{ route('pago.index') }}">
                     <div class="card-panel pink darken-3 waves-effect waves-light white-text"
                          style="width: 100%; padding: 15px; border-radius: 15px;">
                         <div class="row">
@@ -65,18 +65,27 @@
         <div class="row">
             <div class="col s12">
                 <ul class="collection">
-                    <li class="collection-item avatar">
-                        <i class="material-icons circle pink lighten-2">picture_as_pdf</i>
-                        <span class="title">Nombre catalogo</span>
-                        <p>
-                            Marca
-                        </p>
-                        <a href="#!" class="secondary-content" style="color: #A13A3D">
-                            <i class="material-icons">
-                                remove_red_eye
-                            </i>
-                        </a>
-                    </li>
+                    @forelse($catalogos as $c)
+                        <li class="collection-item avatar">
+                            <i class="material-icons circle pink lighten-2">picture_as_pdf</i>
+                            <span class="title">{{ $c->nombre }}</span>
+                            <p>
+                                {{ $c->marca }}
+                            </p>
+                            <a href="{{ route('catalogo.show', $c->id) }}" class="secondary-content"
+                               style="color: #A13A3D">
+                                <i class="material-icons">
+                                    remove_red_eye
+                                </i>
+                            </a>
+                        </li>
+                    @empty
+                        <div class="red darken-4 white-text z-depth-3"
+                             style="width: 100%; padding: 15px 0 15px 0; border-radius: 15px">
+                            <p style="text-align: center; font-weight: bold">¡Aun no tienes registrado ningún
+                                catálogo!.</p>
+                        </div>
+                    @endforelse
                 </ul>
             </div>
         </div>

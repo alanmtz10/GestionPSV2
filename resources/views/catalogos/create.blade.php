@@ -47,7 +47,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row" id="progressBarFileUpload">
+                    <div class="row" id="progressBarFileUpload" style="display: none">
                         <div class="col s5 offset-s2">
                             <div class="preloader-wrapper big active">
                                 <div class="spinner-layer spinner-blue">
@@ -139,13 +139,22 @@
                     $('#progressBarFileUpload').css('display', 'inline');
                 },
                 error: function (error) {
+                    $('#progressBarFileUpload').css('display', 'none');
                     console.log(error);
                 },
                 success: function (resp) {
-                    console.log(resp);
-                    if (resp == 'ok') {
-                        $('#progressBarFileUpload').css('display', 'none');
-                    }
+                    $('#progressBarFileUpload').css('display', 'none');
+                    M.toast({
+                        html: `
+                    <div class="green-text center-align valign-wrapper">
+        <i class="material-icons">
+            check
+        </i>
+        <p style="display: inline-block; padding-left: 10px">Catalogo subido correctamente</p>
+    </div>
+                `
+                    });
+
                 }
             });
         });

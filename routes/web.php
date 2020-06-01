@@ -67,4 +67,26 @@ Route::middleware(['auth'])->group(function () {
         'as' => 'catalogo.store',
         'uses' => 'CatalogosController@store'
     ]);
+
+    Route::get('/catalogo/{id}', [
+        'as' => 'catalogo.show',
+        'uses' => 'CatalogosController@show'
+    ]);
+    /**
+     * Rutas pagos
+     */
+    Route::get('/pagos', [
+        'as' => 'pago.index',
+        'uses' => 'PagosController@index'
+    ]);
+
+    Route::get('/pago/create', [
+        'as' => 'pago.create',
+        'uses' => 'PagosController@create'
+    ]);
+
+    Route::post('/pago/create', [
+        'as' => 'pago.store',
+        'uses' => 'PagosController@store'
+    ]);
 });

@@ -50,4 +50,14 @@ class User extends Authenticatable
         return $this->hasMany(Catalogo::class, 'vendedor_id');
     }
 
+    public function pagosVendedor()
+    {
+        return $this->hasMany(Pago::class, 'vendedor_id');
+    }
+
+    public function pagosCliente()
+    {
+        return $this->hasMany(Pago::class, 'cliente_id');
+    }
+
 }

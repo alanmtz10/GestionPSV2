@@ -27,7 +27,7 @@ class StoreCatalogo extends FormRequest
         return [
             'name' => 'required',
             'marca' => 'required',
-            'catalogoPDF' => 'required|mimes:pdf|max:60000'
+            'catalogoPDF' => 'required|file|max:70000'
         ];
     }
 }
