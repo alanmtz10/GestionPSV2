@@ -15,10 +15,9 @@ class PedidosController extends Controller
     {
         $user = Auth::user()->tipo_usuario;
         if ($user == 1) {
-            $pedidos = Pedido::where('vendedor_id', '=', Auth::user()->id)->where('status', '=', 0)->get();
-
+            $pedidos = Pedido::where('vendedor_id', '=', Auth::user()->id)->where('status', '=', 0)->orderBy('created_at', 'DESC')->get();
         } else {
-            $pedidos = Pedido::where('cliente_id', '=', Auth::user()->id)->get();
+            $pedidos = Pedido::where('cliente_id', '=', Auth::user()->id)->orderBy('created_at', 'DESC')->get();
         }
 
         return view('pedidos.indexVendedor', compact('pedidos'));

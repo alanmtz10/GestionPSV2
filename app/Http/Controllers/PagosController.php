@@ -19,9 +19,9 @@ class PagosController extends Controller
     {
         $user = Auth::user();
         if ($user->tipo_usuario == 1) {
-            $pagos = $user->pagosVendedor()->where('estado', '=', '0')->get();
+            $pagos = $user->pagosVendedor()->where('estado', '=', '0')->orderBy('created_at','DESC')->get();
         } else {
-            $pagos = $user->pagosCliente;
+            $pagos = $user->pagosCliente()->orderBy('created_at','DESC')->get();
         }
 
         return view('pagos.indexVendedor', compact('pagos'));
