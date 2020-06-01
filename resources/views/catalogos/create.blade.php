@@ -36,14 +36,13 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="file-field input-field col s12">
-                            <div class="btn-floating">
-                                <i class="material-icons">attach_file</i>
-                                <input type="file" name="catalogoPDF">
+                        <div class="file-field input-field">
+                            <div class="btn">
+                                <span>Catalogo</span>
+                                <input type="file" name="catalogoPDF" accept="application/pdf">
                             </div>
                             <div class="file-path-wrapper">
-                                <input class="file-path validate" type="text"
-                                       placeholder="Selecciona un catalogo en PDF">
+                                <input class="file-path validate" type="text" placeholder="Inserte un pdf">
                             </div>
                         </div>
                     </div>

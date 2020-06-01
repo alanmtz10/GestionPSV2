@@ -18,7 +18,7 @@
         </div>
         <div class="row">
             <div class="col s6">
-                <a href="{{ route('pedidos.create') }}">
+                <a href="{{ route('pedidos.index') }}">
                     <div class="card-panel purple lighten-3 waves-effect waves-light white-text"
                          style="width: 100%; padding: 15px; border-radius: 15px;">
                         <div class="row">
@@ -28,7 +28,11 @@
                         </div>
                         <div class="row" style="margin-bottom: 0">
                             <div class="col s12">
-                                <h6 style="text-align: center;">Registro de pedidos</h6>
+                                @if(Auth::user()->tipo_usuario == 1)
+                                    <h6 style="text-align: center;">Pedidos de clientes</h6>
+                                @else
+                                    <h6 style="text-align: center;">Mis pedidos</h6>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -52,16 +56,24 @@
                 </a>
             </div>
         </div>
-        <div class="row">
-            <div class="col s6">
-                <h6>Mis catálogos</h6>
+        @if(Auth::user()->tipo_usuario == 1)
+            <div class="row">
+                <div class="col s6">
+                    <h6>Mis catálogos</h6>
+                </div>
+                <div class="col s6">
+                    <a href="{{ route('catalogo.create') }}" class="btn btn-small waves-effect waves-light">
+                        Agregar catalogo
+                    </a>
+                </div>
             </div>
-            <div class="col s6">
-                <a href="{{ route('catalogo.create') }}" class="btn btn-small waves-effect waves-light">
-                    Agregar catalogo
-                </a>
+        @else
+            <div class="row">
+                <div class="col s12">
+                    <h5>Catálogos disponibles</h5>
+                </div>
             </div>
-        </div>
+        @endif
         <div class="row">
             <div class="col s12">
                 <ul class="collection">

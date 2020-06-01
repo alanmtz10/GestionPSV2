@@ -23,6 +23,11 @@ Route::post('/reg', 'CustomRegisterController@register');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/checkuser/{email}', [
+    'as' => 'verifyExistUser',
+    'uses' => 'AjaxController@verifyExistUser'
+]);
+
 
 Route::middleware(['auth'])->group(function () {
     /**
@@ -46,6 +51,11 @@ Route::middleware(['auth'])->group(function () {
     /**
      * Ruta pedidos
      */
+    Route::get('/pedidos', [
+        'as' => 'pedidos.index',
+        'uses' => 'PedidosController@index'
+    ]);
+
     Route::get('/pedido/create', [
         'as' => 'pedidos.create',
         'uses' => 'PedidosController@create'

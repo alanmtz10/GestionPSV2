@@ -24,6 +24,7 @@
 <script>
     M.AutoInit();
 </script>
+@yield('scripts')
 @include('partials.messages')
 </body>
 </html>

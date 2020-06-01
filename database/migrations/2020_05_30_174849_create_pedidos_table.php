@@ -17,8 +17,10 @@ class CreatePedidosTable extends Migration
             $table->id();
             $table->string('marca');
             $table->string('producto');
+            $table->string('cat_pag');
             $table->double('monto')->nullable();
             $table->integer('status')->nullable();
+            $table->unsignedBigInteger('vendedor_id');
             $table->unsignedBigInteger('cliente_id');
             $table->timestamps();
         });

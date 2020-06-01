@@ -5,22 +5,13 @@
         <div class="row" style="padding-top: 10px">
             <div class="col s12">
                 @if(Auth::user()->tipo_usuario == 1)
-                    <h5 style="text-align: center">Pagos pendientes de clientes</h5>
-
+                    <h5 style="text-align: center">Pedidos de clientes</h5>
                 @else
-                    <h5 style="text-align: center">Mis pagos pendientes</h5>
+                    <h5 style="text-align: center">Mis pedidos</h5>
                 @endif
             </div>
         </div>
-        @if(Auth::user()->tipo_usuario == 1)
-            <div class="row">
-                <div class="col s12">
-                    <a href="{{ route('pago.create') }}" class="btn btn-small" style="width: 100%">Notificar pago a
-                        cliente</a>
-                </div>
-            </div>
-        @endif
-        @if($pagos->isEmpty())
+        @if($pedidos->isEmpty())
             <div class="row">
                 <div class="col s12">
                     <img src="{{ asset('img/svg/9.svg') }}" alt="" width="100%">
@@ -30,8 +21,17 @@
                 <div class="col s12">
                     <div class="red darken-4 white-text z-depth-3"
                          style="width: 100%; padding: 15px 0 15px 0; border-radius: 15px">
-                        <p style="text-align: center; font-weight: bold">¡Aun no tienes registrado ningún pago
-                            pendiente!.</p>
+                        @if(Auth::user()->tipo_usuario == 1)
+                            <p style="text-align: center; font-weight: bold">
+                                ¡Tus clientes aún no han registrado ningún
+                                pedido!.
+                            </p>
+                        @else
+                            <p style="text-align: center; font-weight: bold">
+                                ¡Aún no has registrado ningún
+                                pedido!.
+                            </p>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -39,13 +39,12 @@
             <div class="row">
                 <div class="col s12">
                     <ul class="collection">
-                        @foreach($pagos as $p)
+                        @foreach($pedidos as $p)
                             <li class="collection-item avatar">
-                                <img src="{{ asset('img/avatar.png') }}" alt="" class="circle">
-                                <strong class="title">{{ $p->desc }}</strong>
-                                <p>{{ $p->monto }}</p>
-                                <p>{{ $p->cliente->name }}</p>
-                                <p>{{ $p->created_at->diffForHumans() }}</p>
+                                <strong class="title">{{ $p->producto }}</strong>
+                                <p>{{ $p->marca }}</p>
+                                <p>{{ $p->cat_pag }}</p>
+                                <p>Realizado el {{ $p->created_at->format('d/m/Y') }}</p>
                             </li>
                         @endforeach
                     </ul>

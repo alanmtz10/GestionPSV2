@@ -25,7 +25,7 @@
                         <div class="input-field col s12">
                             <i class="material-icons prefix">description</i>
                             <input type="text" class="validate" name="desc" id="desc" required>
-                            <label for="desc">Descripción del pago</label>
+                            <label for="desc">Producto</label>
                         </div>
                     </div>
                     <div class="row">
@@ -33,6 +33,13 @@
                             <i class="material-icons prefix">monetization_on</i>
                             <input type="text" class="validate" name="monto" id="monto" required>
                             <label for="monto">Monto a pagar</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">date_range</i>
+                            <input type="text" class="datepicker" name="fecha_max">
+                            <label for="monto">Fecha de pago</label>
                         </div>
                     </div>
                     <div class="row">

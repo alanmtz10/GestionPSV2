@@ -20,6 +20,7 @@ class CreatePagosTable extends Migration
             $table->integer('estado');
             $table->unsignedBigInteger('vendedor_id');
             $table->unsignedBigInteger('cliente_id');
+            $table->date('prox_fecha')->nullable();
             $table->timestamps();
         });
     }

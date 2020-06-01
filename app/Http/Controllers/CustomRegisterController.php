@@ -13,14 +13,19 @@ class CustomRegisterController extends Controller
     public function register(Request $r)
     {
         try {
-            $usuario = new User([
-                'name' => $r->name,
-                'email' => $r->email,
-                'password' => Hash::make($r->password),
-                'tipo_usuario' => $r->tipoUsuario
-            ]);
-            $usuario->save();
-
+            if ($r->has('tipoUsuario')) {
+                $usuario = new User([
+                    'name' => $r->name,
+                    'email' => $r->email,
+                    'password' => Hash::make($r->password),
+                    'tipo_usuario' => $r->tipoUsuario
+                ]);
+                $usuario->save();
+            } else {
+                $usuario = User::where('email', $r->email)->first();
+                $usuario->password = Hash::make($r->password);
+                $usuario->save();
+            }
             return redirect()->route('login')->with([
                 'message' => 'Usuario registrado correctamente'
             ]);

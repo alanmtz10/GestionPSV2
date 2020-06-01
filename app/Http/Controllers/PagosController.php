@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Pago;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,9 +19,11 @@ class PagosController extends Controller
         $user = Auth::user();
         if ($user->tipo_usuario == 1) {
             $pagos = $user->pagosVendedor()->where('estado', '=', '0')->get();
-
-            return view('pagos.indexVendedor', compact('pagos'));
+        } else {
+            $pagos = $user->pagosCliente;
         }
+
+        return view('pagos.indexVendedor', compact('pagos'));
     }
 
     /**
@@ -42,11 +45,14 @@ class PagosController extends Controller
      */
     public function store(Request $r)
     {
+        $fechaMax = Carbon::createFromFormat('M d, Y', $r->fecha_max);
+
         $pago = new Pago([
             'monto' => $r->monto,
             'desc' => $r->desc,
-            'cliente_id' => $r->cliente,
-            'vendedor_id' => Auth::user()->id,
+            'cliente_id' => Auth::user()->tipo_usuario == 1 ? $r->cliente : Auth::user()->id,
+            'vendedor_id' => Auth::user()->tipo_usuario == 1 ? Auth::user()->id : Auth::user()->vendedor->id,
+            'prox_fecha' => $fechaMax,
             'estado' => 0
         ]);
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Catalogo;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -26,9 +27,15 @@ class HomeController extends Controller
     public function index()
     {
         $horaDia = Carbon::now()->hour;
+        if (Auth::user()->tipo_usuario == 1) {
+            $catalogos = Catalogo::where('vendedor_id', '=', Auth::user()->id)->get();
 
-        $catalogos = Catalogo::all();
+        } else {
+            $catalogos = Auth::user()->vendedor->catalogos;
+        }
 
         return view('home', compact(['horaDia', 'catalogos']));
+
+
     }
 }

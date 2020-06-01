@@ -46,14 +46,16 @@
                         Inicio
                     </a>
                 </li>
-                <li>
-                    <a href="{{ route('clientes.index') }}">
-                        <i class="material-icons">
-                            people_alt
-                        </i>
-                        Mis clientes
-                    </a>
-                </li>
+                @if(Auth::user()->tipo_usuario == 1)
+                    <li>
+                        <a href="{{ route('clientes.index') }}">
+                            <i class="material-icons">
+                                people_alt
+                            </i>
+                            Mis clientes
+                        </a>
+                    </li>
+                @endif
                 <li class="divider"></li>
                 <li>
                     <a href="#" onclick="cerrarSesion()">
@@ -79,6 +81,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script>
     M.AutoInit();
+
+    $('input[fecha_max]').datepicker({
+        minDate: Date.now()
+    });
 
     function cerrarSesion() {
         $('#formLogout').submit();
