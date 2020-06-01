@@ -38,8 +38,8 @@
                     <div class="row">
                         <div class="input-field col s12">
                             <i class="material-icons prefix">date_range</i>
-                            <input type="text" class="datepicker" name="fecha_max">
-                            <label for="fecha_max">Fecha de pago</label>
+                            <input type="text" class="datepicker" name="fecha_max" placeholder="Fecha de pago">
+{{--                            <label for="fecha_max">Fecha de pago</label>--}}
                         </div>
                     </div>
                     <div class="row">
